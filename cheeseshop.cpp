@@ -31,7 +31,14 @@ class CheeseShop {
         CheeseShop(CheeseShop &other) = delete;
         CheeseShop(CheeseShop &&other) = delete;
         CheeseShop &operator=(CheeseShop &other) = delete;
-        CheeseShop &operator=(CheeseShop &&other) = delete;
+        CheeseShop &operator=(CheeseShop &&other) noexcept {
+            inventory = std::move(other.inventory);
+
+            clerkName = other.clerkName;
+            other.clerkName = nullptr;
+
+            return *this;
+        }
 
         std::string gotAny(std::string cheeseName) const {
             if (clerkName && cheeseName == *clerkName)

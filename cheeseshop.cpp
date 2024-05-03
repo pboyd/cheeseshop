@@ -28,6 +28,11 @@ class CheeseShop {
                 delete clerkName;
         }
 
+        CheeseShop(CheeseShop &other) = delete;
+        CheeseShop(CheeseShop &&other) = delete;
+        CheeseShop &operator=(CheeseShop &other) = delete;
+        CheeseShop &operator=(CheeseShop &&other) = delete;
+
         std::string gotAny(std::string cheeseName) const {
             if (clerkName && cheeseName == *clerkName)
                 return "Sir?";

@@ -7,21 +7,37 @@
 
 class CheeseShop {
     public:
-        CheeseShop(){}
-        CheeseShop(std::string configPath) {
+        CheeseShop() :
+            clerkName{nullptr} {}
+        CheeseShop(std::string configPath) :
+            clerkName{nullptr}
+        {
             auto cfg = toml::parse(configPath);
 
             auto cheeses = toml::find<std::vector<std::string>>(cfg, "cheeses");
             for (auto name : cheeses)
                 inventory.insert(name);
+
+            if (cfg.contains("clerk")) {
+                clerkName = new std::string{toml::find<std::string>(cfg, "clerk")};
+            }
+        }
+
+        ~CheeseShop() {
+            if (clerkName)
+                delete clerkName;
         }
 
         std::string gotAny(std::string cheeseName) const {
+            if (clerkName && cheeseName == *clerkName)
+                return "Sir?";
+
             return inventory.count(cheeseName) == 1 ? "Yes" : "No";
         }
 
     private:
         std::unordered_set<std::string> inventory;
+        std::string *clerkName;
 };
 
 int main() {

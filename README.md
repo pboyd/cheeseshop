@@ -1,6 +1,6 @@
 ## Cheese Shop
 
-Yet another Monty Python themed example program for a blog post. Build and run with:
+Yet another Monty Python themed example program for a [blog post](https://pboyd.io/posts/one-c++-footgun/). Build and run with:
 
 ```shell
 make && ./cheeseshop

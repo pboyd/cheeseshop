@@ -34,6 +34,8 @@ class CheeseShop {
         CheeseShop &operator=(CheeseShop &&other) noexcept {
             inventory = std::move(other.inventory);
 
+            if (clerkName)
+                delete clerkName;
             clerkName = other.clerkName;
             other.clerkName = nullptr;
 
